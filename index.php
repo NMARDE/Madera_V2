@@ -1,3 +1,5 @@
+<?php include('DAO.php');
+connexionSite('lol','lul');?>
 <html>
 <img src="./image/connexion.png" usemap=#connexion>
 <map name="connexion">
