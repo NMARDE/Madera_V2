@@ -12,14 +12,17 @@ return $link;
 }
 function connexionSite($login, $mdp){
 	$link=connexionDB();
-	$result=$link->query('select * from commercial');
+	$result=$link->query('select * from Commercial');
 	if(!$result){
 		echo $result;
 		echo 'lol';
 	}
 	 while ($row = $result->fetch()) {
-        printf("%s (%s,%s)\n", $row[0], $row[1], $row[2]);
+        if($row[4]==$login && $row[5]){
+			return true;
+		}
     }
+	return false;
 }
 
 ?>
