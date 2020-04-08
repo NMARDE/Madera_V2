@@ -49,5 +49,4 @@ require("./header.php")
 
 <?php
 require("./footer.php")
->>>>>>> 744ab719154eb2275f8702669eb89f95acf4b537
 ?>
