@@ -1,3 +1,4 @@
+<?php include('DAO.php') ?>
 <html>
 <img src="./image/NommerProjet.png" usemap=#NommerProjet>
 <map name="NommerProjet">

@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION['login'])){
+	?>
+	<script>
+	document.location.href="connexion.php";
+	</script>
+	<?php
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
