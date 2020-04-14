@@ -1,3 +1,9 @@
+<?php
+include('DAO.php');
+if(isset($_POST['Projet'])){
+	creerProjet($_POST['NomProjet'],$_POST['NomClient'],$_POST['ModeleGamme'],$_POST['Isolant'],$_POST['Finition']);
+}
+?>
 <html>
 <img src="./image/Recapitulatif.png" usemap=#Recapitulatif>
 <map name="Recapitulatif">

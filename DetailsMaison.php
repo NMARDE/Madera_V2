@@ -1,25 +1,43 @@
-<html>
-<img src="./image/DetailsMaison.png" usemap=#DetailsMaison>
-<map name="DetailsMaison">
-	<area href="SelectionCoupe.html" shape="rect" coords="10,15,65,60"/>
-	<area href="Recapitulatif.html" shape="rect" coords="155,655,340,695"/>
-</map>
+<?php 
+echo'<html>
 <form method="post" action="Recapitulatif.php">
 <input type="text" placeholder="Nom du plan" name="NomPlan"/>
 <input type="radio" name="Gamme" value="Orientale"/>
 <input type="radio" name="Gamme" value="Vacances"/>
-<input type="radio" name="Gamme" value="Design Luxe"/>
-<!-- liste à remplir via PHP-->
- <select id="ModeleGamme" name="ModeleGamme" id="ModeleGamme">
-</select>
- <select id="Remplissage" name="Remplissage" id="Remplissage">
-</select>
- <select id="Finition" name="Finition" id="Finition">
-</select>
-<input type="submit" value="ok" />
-<!-- et c'est après le click qu'on met tout ce qu'on a sauvegarder dans la base de données dans le back-->
-<input type="hidden" name="plan" value="<?php echo $_POST['plan']?>">
-<input type="hidden" name="NomProjet" value="<?php echo $_POST['NomProjet']?>">
-<input type="hidden" name="Coupe" value="<?php echo $_POST['Coupe']?>">
+<input type="radio" name="Gamme" value="Design Luxe"/>';
+
+echo' <select id="ModeleGamme" name="ModeleGamme" id="ModeleGamme">'
+$arrayGamme=listeGamme();
+if(!empty($arrayGamme)){
+	foreach($arrayGamme as $unGamme){
+		echo '<option value="'.$unGamme.'">'.$unGamme.'</option>';
+	}
+}
+echo'</select>';
+
+echo'<select id="Isolant" name="Isolant" id="Remplissage">';
+ $arrayIsolant=listeIsolant();
+if(!empty($arrayIsolant)){
+	foreach($arrayIsolant as $unIsolant){
+		echo '<option value="'.$unIsolant.'">'.$unIsolant.'</option>';
+	}
+}
+echo'</select>';
+
+echo' <select id="Finition" name="Finition" id="Finition">';
+ $arrayFinition=listeFinition();
+if(!empty($arrayFinition)){
+	foreach($arrayIsolant as $unFinition){
+		echo '<option value="'.$unFinition.'">'.$unFinition.'</option>';
+	}
+}
+echo'</select>';
+echo'<input type="submit" value="ok" />
+<input type="hidden" name="plan" value='.$_POST['plan'].'>
+<input type="hidden" name="NomProjet" value='.$_POST['NomProjet'].'>
+<input type="hidden" name="NomClient" value='.$_POST['NomClient'].'>
+<input type="hidden" name="Coupe" value='.$_POST['Coupe'].'>
+<input type="hidden" name="Projet" value="a crée">
 </form>
-</html>
+</html>';
+?>
