@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <html>
 <img src="./image/SimulationMaison.png" usemap=#SimulationMaison>
 <map name="SimulationMaison">

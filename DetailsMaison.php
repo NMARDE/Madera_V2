@@ -1,16 +1,18 @@
 <?php 
+session_start();
+include('DAO.php');
 echo'<html>
 <form method="post" action="Recapitulatif.php">
 <input type="text" placeholder="Nom du plan" name="NomPlan"/>
-<input type="radio" name="Gamme" value="Orientale"/>
-<input type="radio" name="Gamme" value="Vacances"/>
-<input type="radio" name="Gamme" value="Design Luxe"/>';
+<input type="radio" name="Gamme" value="Standard">Standard</input>
+<input type="radio" name="Gamme" value="Ecologique">Ecologique</input>
+<input type="radio" name="Gamme" value="Prestige">Prestige</input>';
 
-echo' <select id="ModeleGamme" name="ModeleGamme" id="ModeleGamme">'
-$arrayGamme=listeGamme();
-if(!empty($arrayGamme)){
-	foreach($arrayGamme as $unGamme){
-		echo '<option value="'.$unGamme.'">'.$unGamme.'</option>';
+echo' <select id="ModeleGamme" name="ModeleGamme" id="ModeleGamme">';
+$arrayModele=listeModele();
+if(!empty($arrayModele)){
+	foreach($arrayModele as $unModele){
+		echo '<option value="'.$unModele.'">'.$unModele.'</option>';
 	}
 }
 echo'</select>';
@@ -27,7 +29,7 @@ echo'</select>';
 echo' <select id="Finition" name="Finition" id="Finition">';
  $arrayFinition=listeFinition();
 if(!empty($arrayFinition)){
-	foreach($arrayIsolant as $unFinition){
+	foreach($arrayFinition as $unFinition){
 		echo '<option value="'.$unFinition.'">'.$unFinition.'</option>';
 	}
 }

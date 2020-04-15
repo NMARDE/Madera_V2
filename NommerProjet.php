@@ -1,4 +1,5 @@
-<?php include('DAO.php');
+<?php session_start();
+include('DAO.php');
  $plan=$_GET['plan'];
 echo '<html><form method="POST" action="SelectionCoupe.php?plan='.$plan.'">
 	<input type="text" id="NomProjet" name="NomProjet" placeholder="Nom du Projet"/></br>';

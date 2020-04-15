@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <html>
 <img src="./image/SelectionCoupe.png" usemap=#SelectionCoupe>
 <map name="SelectionCoupe">

@@ -29,6 +29,7 @@ function listeClient(){
 		array_push($array,$row[1]." ".$row[2]);
 	}
 	}else{
+		print_r($link->errorInfo());
 		echo"pas de client";
 	}
 	return $array;
@@ -41,94 +42,152 @@ function nouveauClient($nomClient,$prenomClient,$emailClient,$telephoneClient){
 		while($row=$result1->fetch()){
 			$lastId=$row[0];
 		}
+	}else{
+		print_r($link->errorInfo());
 	}
 	$lastId++;
 	$requete='insert into Client values('.$lastId.',"'.$nomClient.'","'.$prenomClient.'","'.$emailClient.'","'.$telephoneClient.'","")';
 	$link->exec($requete);
 	echo "le client a été crée";
 }
-function listeGamme(){
+function listeModele(){
 	$link=connexionDB();
 	$array=array();
-	$result=$link->query('select * from Gamme');
+	$result=$link->query('select * from Modele');
 	if($result){
 		while($row=$result->fetch()){
 			array_push($array,$row[1]);
 		}
+	}else{
+		print_r($link->errorInfo());
 	}
 	return $array;	
 }
 function listeFinition(){
 	$link=connexionDB();
 	$array=array();
-	$result=$link->query('select idCaractéristiques,libelle_caracteristiques from Caractéristiques where Module_IdModule=1');
+	$result=$link->query('select * from FinitionMaison');
 	if($result){
 		while($row=$result->fetch()){
 			array_push($array,$row[1]);
 		}
+	}else{
+		print_r($link->errorInfo());
 	}
 	return $array;
 }
 function listeIsolant(){
 	$link=connexionDB();
 	$array=array();
-	$result=$link->query('select idCaractéristiques,libelle_caracteristiques from Caractéristiques where Module_IdModule=1');
+	$result=$link->query('select * from IsolantMaison');
 	if($result){
 		while($row=$result->fetch()){
 			array_push($array,$row[1]);
 		}
+	}else{
+		print_r($link->errorInfo());
 	}
 	return $array;
 }
-function creerProjet($NomProjet,$NomClient,$Gamme,$Isolant,$Finition){
+function creerProjet($NomProjet,$NomClient,$Gamme,$Modele,$Isolant,$Finition){
 	$link=connexionDB();
 	$array=array();
-	$lastId=0;
+	$lastIdProjet=0;
 	$resultId=$link->query('select * from Projet');
 	if($resultId){
 		while($row=$resultId->fetch()){
-			$lastId=$row[0];
+			$lastIdProjet=$row[0];
 		}
+	}else{
+		print_r($link->errorInfo());
 	}
-	$lastId++;
+	$lastIdProjet++;
+	$lastIdProjetModele=0;
+	$resultIdModele=$link->query('select * from Projet_has_Modele');
+	if($resultIdModele){
+		while($row=$resultIdModele->fetch()){
+			$lastIdProjetModele=$row[0];
+		}
+	}else{
+		print_r($link->errorInfo());
+	}
+	$lastIdProjetModele++;
 	$clientId=0;
-	$NomClient=explode(" ",$NomClient);
-	$resultClient=$link->query('select * from Client where nomClient='.$nomClient[0];
+	$resultClient=$link->query('select * from Client where nomClient="'.$NomClient.'"');
 	if($resultClient){
 		while($row=$resultClient->fetch()){
 			$clientId=$row[0];
 		}
+	}else{
+		print_r($link->errorInfo());
 	}
-		$commercialId=0;
-	$NomClient=explode(" ",$NomClient);
-	$resultCommercial=$link->query('select * from Commercial where loginCommercial='.$_SESSION['login'];
+	$gammeId=0;
+	$resultGamme=$link->query('select * from Gamme where libelle_gamme="'.$Gamme.'"');
+	if($resultGamme){
+		while($row=$resultGamme->fetch()){
+			$gammeId=$row[0];
+		}
+	}else{
+		print_r($link->errorInfo());
+	}
+	$commercialId=0;
+	$resultCommercial=$link->query('select * from Commercial where loginCommercial="'.$_SESSION['login'].'"');
 	if($resultCommercial){
 		while($row=$resultCommercial->fetch()){
 			$commercialId=$row[0];
 		}
+	}else{
+		echo "commercial-";
+		print_r($link->errorInfo());
 	}
-	$isolantArray=array();
-	$resultIsolant=$link->query('select * from Caractéristiques where libelle_caracteristiques='.$Isolant;
+	$modeleId=0;
+	$resultModele=$link->query('select * from Modele where libelle_modele="'.$Modele.'"');
+	if($resultModele){
+		while($row=$resultModele->fetch()){
+			$modeleId=$row[0];
+		}
+	}else{
+		echo "modele-";
+		print_r($link->errorInfo());
+	}
+	$isolantId=0;
+	$resultIsolant=$link->query('select * from IsolantMaison where libelleIsolantMaison="'.$Isolant.'"');
 	if($resultIsolant){
 		while($row=$resultIsolant->fetch()){
-			array_push($isolantArray,$row[0]);
-			array_push($isolantArray,$row[2]);
-			array_push($isolantArray,$row[3]);
+			$isolantId=$row[0];
 		}
+	}else{
+		echo "isolant-";
+		print_r($link->errorInfo());
 	}
-	$finitionArray=array();
-	$resultFinition=$link->query('select * from Caractéristiques where libelle_caracteristiques='.$Isolant;
+	$finitionId=0;
+	$resultFinition=$link->query('select * from FinitionMaison where libelleFinitionMaison="'.$Finition.'"');
 	if($resultFinition){
 		while($row=$resultFinition->fetch()){
-			array_push($isolantFinition,$row[0]);
-			array_push($isolantFinition,$row[2]);
-			array_push($isolantFinition,$row[3]);
+			$finitionId=$row[0];
 		}
+	}else{
+		echo "finition-";
+		print_r($link->errorInfo());
 	}
 	$date = date('d-m-y h:i:s');
-	$link->exec('insert into Projet values('.$lastId.',"'.$NomProjet.'",'.$date.','.$clientId.','.$commercialId.')');
-	$link->exec('create table Projet_Has_Modèle( Projet_idProjet int primary key not null, Modele_idModele)');
-	$link->exec('insert into Projet_Has_Caractéristiques values('.$lastId.','.$isolantArray[0].','.$isolantArray[1].','.$isolantArray[2].')');
-	$link->exec('insert into Projet_Has_Caractéristiques values('.$lastId.','.$finitionArray[0].','.$finitionArray[1].','.$finitionArray[2].')');
+	$link->exec('insert into Projet values('.$lastIdProjet.',"'.$NomProjet.'","'.$date.'",'.$clientId.','.$commercialId.')');
+	$link->exec('insert into Projet_has_Modele values('.$lastIdProjetModele.','.$modeleId.','.$gammeId.','.$finitionId.','.$isolantId.')');
+/*	$resultFinal=$link->query('select * from Projet');
+	if($resultFinal){
+		while($row=$resultFinal->fetch()){
+			echo $row[0]."/".$row[1]."/".$row[2]."/".$row[3]."/".$row[4]."/";
+		}
+	}else{
+		print_r($link->errorInfo());
+	}
+	$resultFinal2=$link->query('select * from Projet_has_Modele');
+	if($resultFinal){
+		while($row=$resultFinal2->fetch()){
+			echo $row[0]."/".$row[1]."/".$row[2]."/".$row[3]."/".$row[4]."/";
+		}
+	}else{
+		print_r($link->errorInfo());
+	}*/
 }
 ?>

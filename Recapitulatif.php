@@ -1,16 +1,11 @@
 <?php
+session_start();
 include('DAO.php');
 if(isset($_POST['Projet'])){
-	creerProjet($_POST['NomProjet'],$_POST['NomClient'],$_POST['ModeleGamme'],$_POST['Isolant'],$_POST['Finition']);
+	creerProjet($_POST['NomProjet'],$_POST['NomClient'],$_POST['Gamme'],$_POST['ModeleGamme'],$_POST['Isolant'],$_POST['Finition']);
 }
 ?>
 <html>
-<img src="./image/Recapitulatif.png" usemap=#Recapitulatif>
-<map name="Recapitulatif">
-	<area href="DetailsMaison.html" shape="rect" coords="10,15,65,60"/>
-	<area href="AjouterModule.html" shape="rect" coords="15,665,225,705"/>
-	<area href="accueil.html" shape="rect" coords="300,665,505,705"/>
-</map>
 Nom du Projet<br>
 <?php echo $_POST['NomProjet'] ?><br>
 Gamme<br>
