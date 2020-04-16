@@ -1,6 +1,10 @@
 <?php
 session_start();
-include('DAO.php');?>
+include('DAO.php');
+	if(isset($_POST['login']) && isset($_POST['mdp'])){
+		connexion();
+	}
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -39,7 +43,7 @@ include('DAO.php');?>
 
    <div class="container">
         <div class="card card-container">
-            <form class="form-signin" action="connexion.php">
+            <form method="POST" class="form-signin" action="connexion.php">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="text" id="login" name="login" class="form-control" placeholder="Entrez votre identifiant" required autofocus>
                 <input type="password" id="mdp" name="mdp" class="form-control" placeholder="Entrez votre mot de passe" required>
@@ -58,7 +62,7 @@ require("footer.php");
 
 <?php
 function connexion() {
-	if(isset($_POST['login']) && isset($_POST['mdp'])){
+
 	if(connexionSite($_POST['login'],$_POST['mdp'])!=false){
 		$_SESSION['login']=$_POST['login'];
         
@@ -67,6 +71,5 @@ function connexion() {
 	}else{
 		echo "connexion échoué";
 	}
-}
 } 
 ?>
