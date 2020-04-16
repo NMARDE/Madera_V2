@@ -60,9 +60,10 @@ include('DAO.php');
 require("footer.php");
 ?>
 
+
+
 <?php
 function connexion() {
-
 	if(connexionSite($_POST['login'],$_POST['mdp'])!=false){
 		$_SESSION['login']=$_POST['login'];
         

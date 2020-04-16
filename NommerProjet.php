@@ -1,13 +1,19 @@
-<?php include('DAO.php') ?>
-<html>
-<img src="./image/NommerProjet.png" usemap=#NommerProjet>
-<map name="NommerProjet">
-	<area href="SimulationMaison.html" shape="rect" coords="10,15,65,60"/>
-	<area href="SelectionCoupe.html" shape="rect" coords="173,535,360,570"/>
-</map>
-<?php $plan=$_GET['plan'] ?>
-<form method="POST" action="SelectionCoupe.php?plan=<?php echo $plan?>">
-	<input type="text" id="NomProjet" name="NomProjet" placeholder="Nom du Projet"/></br>
-	<input type="submit" value="ok"/>
+<?php session_start();
+include('DAO.php');
+ $plan=$_GET['plan'];
+echo '<html><form method="POST" action="SelectionCoupe.php?plan='.$plan.'">
+	<input type="text" id="NomProjet" name="NomProjet" placeholder="Nom du Projet"/></br>';
+$arrayClient=listeClient();
+if(!empty($arrayClient)){
+	echo '<select name="NomClient">';
+	foreach($arrayClient as $unClient){
+		echo '<option value="'.$unClient.'">'.$unClient.'</option>';
+	}
+	echo '</select><br><a href="CreationClient.php">crée un autre client</a>';
+}else{
+	echo "il n'y a pas de client actuellement, il vous faudra en ajouter un<br><a href='CreationClient.php'>crée un autre client</a>";
+}
+echo'	<input type="submit" value="ok"/>
 </form>
-</html>
+</html>';
+?>

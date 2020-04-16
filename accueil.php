@@ -49,7 +49,7 @@ session_start();
               <div class="media-body py-4 px-3">
                 <h3 class="heading">Simuler une maison</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                <p><a href="#" class="btn btn-primary">Simuler</a></p>
+                <p><a href="SimulationMaison.php" class="btn btn-primary">Simuler</a></p>
               </div>
             </div>      
           </div>
