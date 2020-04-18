@@ -1,29 +1,72 @@
+<?php
+session_start();
+include('DAO.php');
+if(!isset($_POST['Module'])){
+
+?>
+
 <html>
-<img src="./image/AjoutModule.png" usemap=#AjouterModule>
-<map name="AjouterModule">
-	<area href="Recapitulatif.html" shape="rect" coords="10,15,65,60"/>
-	<area href="Recapitulatif.html" shape="rect" coords="175,665,360,705"/>
-</map>
-<form method="post" action="Recapitulatif.php">
-<input type="text" placeholder="Nommer le Module" id="NomModule" name="NomModule"/><br>
-<select id="ListeModule" name="ListeModule" placeholder="Rechercher un module">
-</select><br>
-Mur avec angle<br>
-Longueur
-<input type="text" id="LongueurAngle" name="LongueurAngle"/><br>
-Largeur
-<input type="text" id="LargeurAngle" name="LargeurAngle"/><br>
-Mur entrant<br>
-Longueur
-<input type="text" id="LongueurEntrant" name="LongueurEntrant"/><br>
-Largeur
-<input type="text" id="LargeurEntrant" name="LargeurEntrant"/><br>
-Mur sortant<br>
-Longueur
-<input type="text" id="LongueurSortant" name="LongueurSortant"/><br>
-Largeur
-<input type="text" id="LargeurSortant" name="LargeurSortant"/><br>
+<form method="post" action="AjouterModule.php">
+<?php
+echo' <select id="Module" name="Module" id="Module">';
+$arrayModule=listeModule();
+if(!empty($arrayModule)){
+	foreach($arrayModule as $unModule){
+		echo '<option value="'.$unModule.'">'.$unModule.'</option>';
+	}
+}
+echo'</select>';
+?>
 <input type="submit" value="ok"/>
-<!--Avec le nom du projet on peut récupérer l'identifiant du projet, comme ça on pourra l'associer un module-->
 </form>
 </html>
+<?php
+}else{
+	if(!isset($_POST['CaracCount'])){
+	echo'<html>
+	<form method="post" action="AjouterModule.php"><br>';
+	if(isset($_POST['NomModule'])){
+		echo "Nom du module: ".$_POST['NomModule'];
+	}else{
+		echo "Nom du module: ".$_POST['Module'];
+	}
+	echo'<input type="text" name="tailleModule" id="tailleModule" placeholder="Taille du module"/><br>';
+	$listeCarac=array();
+	$listeCarac=listeCarac($_POST['Module']);
+	$listeValCarac=array();
+	for($i=0;$i<count($listeCarac);$i++){
+		if($i%2 != 1){
+		$listeValCarac=listeValCarac($listeCarac[$i]);
+		echo $listeCarac[$i+1];
+		echo "<select id='Carac".$i."' name='Carac".$i."'>";
+		foreach($listeValCarac as $oneValCarac){
+			echo "<option value=".$oneValCarac.">".$oneValCarac."</option>";
+		}
+		echo "</select>";
+		echo "<input type='hidden' name='IdCarac".$i."' value='".$listeCarac[$i]."'/>";
+		}
+	}
+	echo'<input type="hidden" name="NomModule" id="NomModule" value="'.$_POST['Module'].'">
+	<input type="hidden" name="Module" id="Module" value="'.$_POST['Module'].'"/>
+	<input type="hidden" name="CaracCount" id="CaracCount" value='.count($listeCarac).'/><input type="submit" value="ok"';
+	echo'</html>';
+	}else{
+		$listeCarac=array();
+		$currentCarac="";
+		for($i=0;$i<$_POST['CaracCount'];$i++){
+			if($i%2 != 1){
+			$currentIdCarac="IdCarac".$i;
+			$currentCarac="Carac".$i;
+			if(isset($_POST[$currentCarac])){
+				array_push($listeCarac,$_POST[$currentIdCarac]);
+				array_push($listeCarac,getValCaracByLib($_POST[$currentCarac],$_POST[$currentIdCarac]));
+			}
+			}
+		}
+		creerModule($listeCarac,$_POST['Module'],$_POST['tailleModule']);
+		
+		
+	}
+
+}
+?>
