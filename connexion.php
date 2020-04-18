@@ -2,7 +2,6 @@
 session_start();
 include('DAO.php');
 	if(isset($_POST['login']) && isset($_POST['mdp'])){
-		$_SESSION['login']=$_POST['login'];
 		connexion();
 	}
 ?>
@@ -58,7 +57,7 @@ include('DAO.php');
 
 
 <?php 
-
+require("footer.php");
 ?>
 
 
@@ -73,6 +72,5 @@ function connexion() {
 	}else{
 		echo "connexion échoué";
 	}
-}
-require("footer.php");
+} 
 ?>
