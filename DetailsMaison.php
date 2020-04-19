@@ -4,7 +4,7 @@ include('DAO.php');
 echo'
 <html>
 <head>
-    <title>Nommer votre projet</title>
+    <title>Details Maison</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -28,23 +28,10 @@ echo'
   <body>';
 
   require('navbar.php');
-
-  echo'
+  echo' <br><br><br><br>
 <div class="container">
 <form method="post" action="Recapitulatif.php">
-<input type="text" placeholder="Nom du plan" name="NomPlan"/>
-<input type="radio" name="Gamme" value="Standard">Standard</input>
-<input type="radio" name="Gamme" value="Ecologique">Ecologique</input>
-<input type="radio" name="Gamme" value="Prestige">Prestige</input>';
-
-echo' <select id="ModeleGamme" name="ModeleGamme" id="ModeleGamme">';
-$arrayModele=listeModele();
-if(!empty($arrayModele)){
-	foreach($arrayModele as $unModele){
-		echo '<option value="'.$unModele.'">'.$unModele.'</option>';
-	}
-}
-echo'</select>';
+<input type="text" placeholder="Nom du plan" name="NomPlan"/>';
 
 echo'<select id="Isolant" name="Isolant" id="Remplissage">';
  $arrayIsolant=listeIsolant();
@@ -64,10 +51,10 @@ if(!empty($arrayFinition)){
 }
 echo'</select>';
 echo'<input type="submit" value="ok" />
-<input type="hidden" name="plan" value='.$_POST['plan'].'>
-<input type="hidden" name="NomProjet" value='.$_POST['NomProjet'].'>
-<input type="hidden" name="NomClient" value='.$_POST['NomClient'].'>
-<input type="hidden" name="Coupe" value='.$_POST['Coupe'].'>
+<input type="hidden" name="ModeleGamme" value="'.$_GET['ModeleGamme'].'">
+<input type="hidden" name="Gamme" value="'.$_GET['Gamme'].'">
+<input type="hidden" name="NomProjet" value="'.$_GET['NomProjet'].'">
+<input type="hidden" name="NomClient" value="'.$_GET['NomClient'].'">
 <input type="hidden" name="Projet" value="a crée">
 </form>
 </html>';

@@ -7,7 +7,7 @@ session_start();
 	<area href="NommerProjet.html" shape="rect" coords="10,15,65,60"/>
 	<area href="DetailsMaison.html" shape="rect" coords="135,655,390,695"/>
 </map>
-<form method="post" action="DetailsMaison.php">
+<form method="post" action="SelectionGamme.php">
  <select id="Coupe" name="Coupe" id="Coupe">
   <option value="Principe1" selected>Coupe de Principe 1</option>
   <option value="Principe2">Coupe de Principe 2</option>

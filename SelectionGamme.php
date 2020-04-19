@@ -25,6 +25,7 @@
   <body>
 
   <?php 
+  $NomClient=Explode(" ",$_POST['NomClient']);
   require("navbar.php");
   ?>
 
@@ -46,7 +47,7 @@
               <div class="media-body py-4 px-3">
                 <h3 class="heading">Standard</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                <p><a href="NommerProjet.php" class="btn btn-primary">Choisir</a></p>
+				<?php echo'<p><a href="SelectionModele.php?Gamme=Standard&NomProjet='.$_POST['NomProjet'].'&NomClient='.$NomClient[0].'" class="btn btn-primary">Choisir</a></p>' ?>
               </div>
             </div>      
           </div>
@@ -56,7 +57,7 @@
               <div class="media-body py-4 px-3">
                 <h3 class="heading">Écologique</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                <p><a href="#" class="btn btn-primary">Choisir</a></p>
+                <?php echo'<p><a href="SelectionModele.php?Gamme=Ecologize&NomProjet='.$_POST['NomProjet'].'&NomClient='.$NomClient[0].'" class="btn btn-primary">Choisir</a></p>' ?>
               </div>
             </div>    
           </div>
@@ -66,7 +67,7 @@
               <div class="media-body py-4 px-3">
                 <h3 class="heading">Prestige</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                <p><a href="#" class="btn btn-primary">Choisir</a></p>
+                <?php echo'<p><a href="SelectionModele.php?Gamme=Prestige&NomProjet='.$_POST['NomProjet'].'&NomClient='.$NomClient[0].'" class="btn btn-primary">Choisir</a></p>' ?>
               </div>
             </div>      
           </div>

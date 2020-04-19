@@ -24,5 +24,5 @@ Modele de Gamme<br>
 <input type="hidden" name="NomProjet" value="<?php if(isset($_POST['NomProjet'])){echo $_POST['NomProjet'];}?>">
 <input type="hidden" name="Coupe" value="<?php if(isset($_POST['Coupe'])){echo $_POST['Coupe'];}?>"><br>
 <a href="AjouterModule.php?=<?php if(isset($_POST['NomProjet'])){echo $_POST['NomProjet'];}?>">Ajouter un module</a>
-<a href="accueil.html">Créer le devis</a>
+<a href="Devis.php">Créer le devis</a>
 </html>

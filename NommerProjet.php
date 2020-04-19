@@ -1,6 +1,5 @@
 <?php session_start();
 include('DAO.php');
- $plan=$_GET['plan'];
 echo '<html>
 <head>
     <title>MaderaApp - Nommer votre projet</title>
@@ -36,10 +35,9 @@ echo'
         </div>
       </div>
     </div>
-
 <div class="container">
     <div class="card card-container">
-        <form method="POST" class="form-signin" action="SelectionCoupe.php?plan='.$plan.'">
+        <form method="POST" class="form-signin" action="SelectionGamme.php">
         <input type="text" id="NomProjet" name="NomProjet" class="form-control" placeholder="Entrez le nom du projet" required autofocus>';
 $arrayClient=listeClient();
 if(!empty($arrayClient)){
