@@ -76,6 +76,57 @@ function listeModule(){
 	}
 	return $array;	
 }
+function listeModuleProjet(){
+	$link=connexionDB();
+	$array=array();
+	$idProjet=getProjetFromName($_SESSION['NomProjet']);
+	$result=$link->query('select distinct libelle_module from Module,Projet_has_Caractéristiques where Projet_has_Caractéristiques.Caractéristiques_Module_idModule=Module.idModule and idModule='.$idProjet[0]);
+	if($result){
+		while($row=$result->fetch()){
+			array_push($array,$row[0]);
+		}
+	}else{
+		print_r($link->errorInfo());
+	}
+	return $array;
+}
+function getProjetCarac($unModule){
+	$link=connexionDB();
+	$array=array();
+	$idModule=getModuleByName($unModule);
+	$idProjet=getProjetFromName($_SESSION['NomProjet']);
+	$result=$link->query('select Caractéristiques_idCaractéristiques from Projet_has_Caractéristiques where Projet_idProjet='.$idProjet[0].' and Caractéristiques_Module_idModule='.$idModule);
+	if($result){
+		while($row=$result->fetch()){
+			array_push($array,$row[0]);
+		}
+	}else{
+		print_r($link->errorInfo());
+	}
+	return $array;
+}
+function getLibelleCaracById($idCarac,$unModule){
+	$link=connexionDB();
+	$idModule=getModuleByName($unModule);
+	$array=array();
+	$idProjet=getProjetFromName($_SESSION['NomProjet']);
+	$result=$link->query('select libelle_caracteristiques, libelle_ValCarac 
+	from Caractéristiques, Projet_has_Caractéristiques, ValCarac 
+	where Caractéristiques.idCaractéristiques=Projet_has_Caractéristiques.Caractéristiques_idCaractéristiques
+	and ValCarac.idValCarac=Projet_has_Caractéristiques.Caractéristiques_ValCarac_idValCarac
+	and Projet_idProjet='.$idProjet[0].' 
+	and Caractéristiques_Module_idModule='.$idModule.' 
+	and Projet_has_Caractéristiques.Caractéristiques_idCaractéristiques='.$idCarac);
+	if($result){
+		while($row=$result->fetch()){
+			array_push($array,$row[0]);
+			array_push($array,$row[1]);
+		}
+	}else{
+		print_r($link->errorInfo());
+	}
+	return $array;
+}
 function listeFinition(){
 	$link=connexionDB();
 	$array=array();
@@ -229,6 +280,19 @@ function listeCarac($Module){
 		print_r($link->errorInfo());
 	}
 	return $array;
+}
+function getIdModeleByName($NomModele){
+	$link=connexionDB();
+	$idModele=0;
+	$result=$link->query('select idModele from Modele where libelle_modele="'.$NomModele.'"');
+	if($result){
+		while($row=$result->fetch()){
+			$idModele=$row[0];
+		}
+	}else{
+		print_r($link->errorInfo());
+	}
+	return $idModele;
 }
 function listeValCarac($idCarac){
 	$link=connexionDB();

@@ -20,6 +20,26 @@ Gamme<br>
 <?php echo $_POST['Gamme'] ?><br>
 Modele de Gamme<br>
 <?php echo $_POST['ModeleGamme'] ?><br>
+<?php $arrayModule=listeModuleProjet();
+
+if(!empty($arrayModule)){
+	$arrayCarac=array();
+	$libelleCarac=array();
+	echo "Modules intégrés: <br>";
+	foreach($arrayModule as $unModule){
+		echo $unModule.'<br>';
+		$arrayCarac=getProjetCarac($unModule);
+		if(!empty($arrayCarac)){
+			foreach($arrayCarac as $oneCarac){
+				$libelleCarac=getLibelleCaracById($oneCarac,$unModule);
+				echo $libelleCarac[0].' ';
+				echo $libelleCarac[1];
+				echo '<br>';
+			}
+		}
+	}
+}
+?>
 <input type="hidden" name="plan" value="<?php if(isset($_POST['plan'])){echo $_POST['plan'];}?>">
 <input type="hidden" name="NomProjet" value="<?php if(isset($_POST['NomProjet'])){echo $_POST['NomProjet'];}?>">
 <input type="hidden" name="Coupe" value="<?php if(isset($_POST['Coupe'])){echo $_POST['Coupe'];}?>"><br>
