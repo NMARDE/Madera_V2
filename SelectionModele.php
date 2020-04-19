@@ -41,22 +41,35 @@
     	<div class="container">
     		<div class="row">
           <?php
+         
 		  $arrayModele;
           $arrayModele=listeModele(getGammeByName($_GET['Gamme']));
           if(!empty($arrayModele)){
             foreach($arrayModele as $unModele){
+              $arrayPrixModele;
+              $arrayPrixModele=getPrixModeleByName($unModele);
+              if(!empty($arrayPrixModele)){
+              foreach($arrayPrixModele as $unPrixModele){
+              $arrayImageModele;
+              $arrayImageModele=getImageModeleByName($unModele);
+              if(!empty($arrayImageModele)){
+                foreach($arrayImageModele as $uneImageModele){
               echo '<div class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
               <div class="d-block services-wrap text-center">
-                <div class="img" style="background-image: url(image/maison_standard.jpg);"></div>
+                <div class="img" style="background-image: url(\''.$uneImageModele.'.jpg\');"></div>
                 <div class="media-body py-4 px-3">
                   <h3 class="heading">'.$unModele.'</h3>
-                  <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                  <p>A partir de '.$unPrixModele.' euros TTC</p>
                   <p><a href="DetailsMaison.php?Gamme='.$_GET['Gamme'].'&ModeleGamme='.$unModele.'&NomProjet='.$_GET['NomProjet'].'&NomClient='.$_GET['NomClient'].'" class="btn btn-primary">Choisir</a></p>
                 </div>
               </div>      
             </div>';
             }
           }
+        }
+      }
+    }
+  }
           ?>
         </div>
     	</div>

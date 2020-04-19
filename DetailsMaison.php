@@ -29,28 +29,41 @@ echo'
 
   require('navbar.php');
   echo' <br><br><br><br>
-<div class="container">
-<form method="post" action="Recapitulatif.php">
-<input type="text" placeholder="Nom du plan" name="NomPlan"/>';
+  <div class="hero-wrap js-fullheight" style="background-image: url(\'image/bois_accueil.jpg\');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+        </div>
+      </div>
+    </div>
 
-echo'<select id="Isolant" name="Isolant" id="Remplissage">';
+<div class="container">
+<div class="card card-container">
+<form method="post" class="form-signin" action="Recapitulatif.php">
+<input type="text" class="form-control" placeholder="Nom du plan" name="NomPlan"/></br>';
+
+echo'
+<label>Isolant de la maison</label>
+<select class="form-control" id="Isolant" placeholder="Choisir l\'isolant" name="Isolant" id="Remplissage">';
  $arrayIsolant=listeIsolant();
 if(!empty($arrayIsolant)){
 	foreach($arrayIsolant as $unIsolant){
 		echo '<option value="'.$unIsolant.'">'.$unIsolant.'</option>';
 	}
 }
-echo'</select>';
+echo'</select></br>';
 
-echo' <select id="Finition" name="Finition" id="Finition">';
+echo' 
+<label>Finition extérieure de la maison</label>
+<select class="form-control" id="Finition" name="Finition" id="Finition">';
  $arrayFinition=listeFinition();
 if(!empty($arrayFinition)){
 	foreach($arrayFinition as $unFinition){
 		echo '<option value="'.$unFinition.'">'.$unFinition.'</option>';
 	}
 }
-echo'</select>';
-echo'<input type="submit" value="ok" />
+echo'</select></br>';
+echo'<input type="submit" class="btn btn-primary btn-block" value="Valider" />
 <input type="hidden" name="ModeleGamme" value="'.$_GET['ModeleGamme'].'">
 <input type="hidden" name="Gamme" value="'.$_GET['Gamme'].'">
 <input type="hidden" name="NomProjet" value="'.$_GET['NomProjet'].'">

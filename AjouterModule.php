@@ -94,7 +94,6 @@ echo'	<div class="hero-wrap js-fullheight" style="background-image: url(\'image/
 		  <div class="overlay"></div>
 		  <div class="container">
 			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
-			<h1 class="mb-4">Ajoutez des modules comme bon vous semble...</h1>
 			</div>
 		  </div>
 		</div>
@@ -102,11 +101,11 @@ echo'	<div class="hero-wrap js-fullheight" style="background-image: url(\'image/
 	
 	<div class="container">
 		<div class="card card-container">
-	<form method="post" class="form-signin" action="AjouterModule.php"><br>';
+	<form method="post" class="form-signin" action="AjouterModule.php"></br>';
 	if(isset($_POST['NomModule'])){
-		echo "Nom du module: ".$_POST['NomModule'];
+		echo' <h3>Module : '.$_POST['NomModule'].'</h3></br>';
 	}else{
-		echo "Nom du module: ".$_POST['Module'];
+		echo' <h3>Module : '.$_POST['Module'].'</h3></br>';
 	}
 	echo'<input type="text" class="form-control" name="tailleModule" id="tailleModule" placeholder="Taille du module en m²"/><br>';
 	$listeCarac=array();
@@ -120,7 +119,7 @@ echo'	<div class="hero-wrap js-fullheight" style="background-image: url(\'image/
 		foreach($listeValCarac as $oneValCarac){
 			echo "<option value=".$oneValCarac.">".$oneValCarac."</option>";
 		}
-		echo "</select>";
+		echo "</select></br>";
 		echo "<input type='hidden' name='IdCarac".$i."' value='".$listeCarac[$i]."'/>";
 		}
 	}
