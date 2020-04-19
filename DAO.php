@@ -266,6 +266,19 @@ function creerModule($listeCarac,$Module,$TailleModule){
 		}
 	}
 }
+function getPrix(){
+	$link=connexionDB();
+	$projet=getProjetFromName($_SESSION['NomProjet']);
+	$array=array();
+	$result=$link->query('select prix_ValCarac, taille from Projet_has_Caractéristiques, ValCarac where Projet_has_Caractéristiques.ValCarac_idValCarac=ValCarac.idValCarac and Projet_idProjet='.$projet[0]);
+	if($result){
+		while($row=$result->fetch()){
+			array_push($array,$row[0]);
+			array_push($array,$row[1]);
+		}
+	}
+	return $array;
+}
 function getModeleById($idModele){
 	$link=connexionDB();
 	$array=array();
