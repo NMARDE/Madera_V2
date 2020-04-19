@@ -1,11 +1,7 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <title>MaderaApp</title>
+    <title>MaderaApp - Selection de la gamme</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -36,6 +32,7 @@ session_start();
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+        <h1 class="mb-4-selection">Sélectionnez la gamme qui fait chavirer votre coeur...</h1>
         </div>
       </div>
     </div>
@@ -45,31 +42,31 @@ session_start();
     		<div class="row">
           <div class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
             <div class="d-block services-wrap text-center">
-              <div class="img" style="background-image: url(image/simuler_maison.jpg);"></div>
+              <div class="img" style="background-image: url(image/maison_standard.jpg);"></div>
               <div class="media-body py-4 px-3">
-                <h3 class="heading">Simuler une maison</h3>
+                <h3 class="heading">Standard</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                <p><a href="NommerProjet.php" class="btn btn-primary">Simuler</a></p>
+                <p><a href="NommerProjet.php" class="btn btn-primary">Choisir</a></p>
               </div>
             </div>      
           </div>
           <div class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
             <div class="d-block services-wrap text-center">
-              <div class="img" style="background-image: url(image/client.jpg);"></div>
+              <div class="img" style="background-image: url(image/maison_ecolo.jpg);"></div>
               <div class="media-body py-4 px-3">
-                <h3 class="heading">Gestion des clients</h3>
+                <h3 class="heading">Écologique</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                <p><a href="#" class="btn btn-primary">Rechercher</a></p>
+                <p><a href="#" class="btn btn-primary">Choisir</a></p>
               </div>
             </div>    
           </div>
           <div class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
             <div class="d-block services-wrap text-center">
-              <div class="img" style="background-image: url(image/projet.png);"></div>
+              <div class="img" style="background-image: url(image/maison_luxe.jpg);"></div>
               <div class="media-body py-4 px-3">
-                <h3 class="heading">Gestion des projets</h3>
+                <h3 class="heading">Prestige</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                <p><a href="#" class="btn btn-primary">Rechercher</a></p>
+                <p><a href="#" class="btn btn-primary">Choisir</a></p>
               </div>
             </div>      
           </div>
