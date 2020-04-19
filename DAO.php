@@ -50,10 +50,10 @@ function nouveauClient($nomClient,$prenomClient,$emailClient,$telephoneClient){
 	$link->exec($requete);
 	echo "le client a été crée";
 }
-function listeModele(){
+function listeModele($idGamme){
 	$link=connexionDB();
 	$array=array();
-	$result=$link->query('select * from Modele');
+	$result=$link->query('select * from Modele where Gamme_idGamme='.$idGamme);
 	if($result){
 		while($row=$result->fetch()){
 			array_push($array,$row[1]);
@@ -61,7 +61,7 @@ function listeModele(){
 	}else{
 		print_r($link->errorInfo());
 	}
-	return $array;	
+	return $array;		
 }
 function listeModule(){
 	$link=connexionDB();
@@ -278,6 +278,33 @@ function getPrix(){
 		}
 	}
 	return $array;
+}
+function getModeleByGamme($NomGamme){
+	$link=connexionDB();
+	$idGamme=getGammeByName($NomGamme);
+	$array=array();
+	$result=$link->query('select * from Modele where Gamme_idGamme='.$idGamme);
+	if($result){
+		while($row=$result->fetch()){
+			array_push($array,row[1]);
+		}
+	}else{
+		print_r($link->errorInfo());
+	}
+	return $array;
+}
+function getGammeByName($NomGamme){
+	$link=connexionDB();
+	$idGamme=0;
+	$result=$link->query('select idGamme from Gamme where libelle_gamme="'.$NomGamme.'"');
+	if($result){
+		while($row=$result->fetch()){
+			$idGamme=$row[0];
+		}
+	}else{
+		print_r($link->errorInfo());
+	}
+	return $idGamme;
 }
 function getModeleById($idModele){
 	$link=connexionDB();

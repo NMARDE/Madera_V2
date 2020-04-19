@@ -25,6 +25,7 @@
   <body>
 
   <?php 
+  include('DAO.php');
   require("navbar.php");
   ?>
 
@@ -34,58 +35,29 @@
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
         </div>
       </div>
-    </div>
+    </div>-
 
 <section class="ftco-section ftco-services">
     	<div class="container">
     		<div class="row">
           <?php
-          $arrayModele=listeModele();
+		  $arrayModele;
+          $arrayModele=listeModele(getGammeByName($_GET['Gamme']));
           if(!empty($arrayModele)){
             foreach($arrayModele as $unModele){
               echo '<div class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
               <div class="d-block services-wrap text-center">
                 <div class="img" style="background-image: url(image/maison_standard.jpg);"></div>
                 <div class="media-body py-4 px-3">
-                  <h3 class="heading">'$unModele'</h3>
+                  <h3 class="heading">'.$unModele.'</h3>
                   <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                  <p><a href="NommerProjet.php" class="btn btn-primary">Choisir</a></p>
+                  <p><a href="DetailsMaison.php?Gamme='.$_GET['Gamme'].'&ModeleGamme='.$unModele.'&NomProjet='.$_GET['NomProjet'].'&NomClient='.$_GET['NomClient'].'" class="btn btn-primary">Choisir</a></p>
                 </div>
               </div>      
             </div>';
             }
           }
           ?>
-          <div class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
-            <div class="d-block services-wrap text-center">
-              <div class="img" style="background-image: url(image/maison_standard.jpg);"></div>
-              <div class="media-body py-4 px-3">
-                <h3 class="heading">Standard</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                <p><a href="NommerProjet.php" class="btn btn-primary">Choisir</a></p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
-            <div class="d-block services-wrap text-center">
-              <div class="img" style="background-image: url(image/maison_ecolo.jpg);"></div>
-              <div class="media-body py-4 px-3">
-                <h3 class="heading">Écologique</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                <p><a href="#" class="btn btn-primary">Choisir</a></p>
-              </div>
-            </div>    
-          </div>
-          <div class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
-            <div class="d-block services-wrap text-center">
-              <div class="img" style="background-image: url(image/maison_luxe.jpg);"></div>
-              <div class="media-body py-4 px-3">
-                <h3 class="heading">Prestige</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                <p><a href="#" class="btn btn-primary">Choisir</a></p>
-              </div>
-            </div>      
-          </div>
         </div>
     	</div>
     </section>
