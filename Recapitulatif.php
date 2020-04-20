@@ -29,7 +29,6 @@ if(isset($_POST['RechercheProjet'])){
 
 <html>
 <head>
-<?php if(isset($_POST['NomProjet'])){echo $_POST['NomProjet'];}else{echo $_SESSION['NomProjet'];} ?><br>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -53,24 +52,6 @@ if(isset($_POST['RechercheProjet'])){
   <div class="hero-wrap js-fullheight" style="background-image: url('image/bois_accueil.jpg');" data-stellar-background-ratio="0.5">
 <?php $arrayModule=listeModuleProjet();
 require('navbar.php');
-  
-if(!empty($arrayModule)){
-	$arrayCarac=array();
-	$libelleCarac=array();
-	echo "Modules intégrés: <br>";
-	foreach($arrayModule as $unModule){
-		echo $unModule.'<br>';
-		$arrayCarac=getProjetCarac($unModule);
-		if(!empty($arrayCarac)){
-			foreach($arrayCarac as $oneCarac){
-				$libelleCarac=getLibelleCaracById($oneCarac,$unModule);
-				echo $libelleCarac[0].' ';
-				echo $libelleCarac[1];
-				echo '<br>';
-			}
-		}
-	}
-}
 ?>
       <div class="overlay"></div>
 <input type="hidden" name="NomProjet" value="<?php if(isset($_POST['NomProjet'])){echo $_POST['NomProjet'];}else{echo $_SESSION['NomProjet'];}?>">

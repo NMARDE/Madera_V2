@@ -39,7 +39,7 @@ require_once('DAO.php')
     </div>
 
 
-
+<br><br><br><br>
 <div class="container">
 <div class="search card card-container">
 <h3>Clients</h3>
@@ -56,11 +56,10 @@ require_once('DAO.php')
 <?php 
 $i = 0;
 $arrayClient = ListeClientDetaille();
-
-while(isset($array[$i]['nomClient'])){
+while(isset($arrayClient[$i]['nomClient'])){
   
-  echo'<tr><td>'.$array[$i]['nomClient'].'</td>';
-  '<td>'.$array[$i]['prenomClient'].'</td></tr>';
+  echo'<tr><td>'.$arrayClient[$i]['nomClient'].'</td>';
+  '<td>'.$arrayClient[$i]['prenomClient'].'</td></tr>';
   $i++;
   }
 

@@ -34,7 +34,7 @@ function listeClient(){
 	}
 	return $array;
 }
-function listeClient2(){
+function ListeClientDetaille(){
 	$link=connexionDB();
 	$array=array();
 	$result=$link->query('select * from Client');
@@ -100,7 +100,7 @@ function listeModuleProjet(){
 	$link=connexionDB();
 	$array=array();
 	$idProjet=getProjetFromName($_SESSION['NomProjet']);
-	$result=$link->query('select distinct libelle_module from Module,Projet_has_Caractéristiques where Projet_has_Caractéristiques.Caractéristiques_Module_idModule=Module.idModule and idModule='.$idProjet[0]);
+	$result=$link->query('select distinct libelle_module from Module,Projet_has_Caractéristiques where Projet_has_Caractéristiques.Caractéristiques_Module_idModule=Module.idModule and Projet_idProjet='.$idProjet[0]);
 	if($result){
 		while($row=$result->fetch()){
 			array_push($array,$row[0]);
@@ -366,9 +366,18 @@ function creerModule($listeCarac,$Module,$TailleModule){
 	$link=connexionDB();
 	$idModule=getModuleByName($Module);
 	$projet=getProjetFromName($_SESSION['NomProjet']);
+	$doublon=false;
 	for($i=0;$i<count($listeCarac);$i++){
 		if($i%2 != 1){
-		$link->query('insert into Projet_has_Caractéristiques values('.$projet[0].','.$listeCarac[$i].','.$idModule.','.$listeCarac[$i+1].',"'.$TailleModule.'")');
+			$result=$link->query('select * from Projet_has_Caractéristiques where Projet_idProjet='.$projet[0].' and Caractéristiques_idCaractéristiques='.$listeCarac[$i].' and Caractéristiques_Module_idModule='.$idModule);
+			while($row=$result->fetch()){
+				$doublon=true;
+			}
+			if(!$doublon){
+				$link->query('insert into Projet_has_Caractéristiques values('.$projet[0].','.$listeCarac[$i].','.$idModule.','.$listeCarac[$i+1].',"'.$TailleModule.'")');
+			}else{
+				echo "doublon interdit ";
+			}
 		}
 	}
 }
