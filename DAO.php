@@ -34,31 +34,10 @@ function listeClient(){
 	}
 	return $array;
 }
-function getClientById($idClient)
- {
-    $array=array();
-    $link=connexionDB();
-    $result=$link->query('select * from Client where idClient='.$idClient);
-    if($result){
-    while($row=$result->fetch())
-    {
-        array_push($array,$row[1]);
-        array_push($array,$row[2]);
-        array_push($array,$row[3]);
-        array_push($array,$row[4]);
-        array_push($array,$row[5]);
-    } 
-}else{
-    print_r($link->errorInfo());
-    echo"Ce client n'existe pas";
-}
-return $array;
-
- }
-function nouveauClient($nomClient,$prenomClient,$emailClient,$telephoneClient){
+function nouveauClient($nomClient,$prenomClient,$mailClient,$telephoneClient,$RIBClient){
 	$link=connexionDB();
 	$lastId=0;
-	$result1=$link->query('select * from client');
+	$result1=$link->query('select * from Client');
 	if($result1){
 		while($row=$result1->fetch()){
 			$lastId=$row[0];
@@ -67,9 +46,19 @@ function nouveauClient($nomClient,$prenomClient,$emailClient,$telephoneClient){
 		print_r($link->errorInfo());
 	}
 	$lastId++;
-	$requete='insert into Client values('.$lastId.',"'.$nomClient.'","'.$prenomClient.'","'.$emailClient.'","'.$telephoneClient.'","")';
-	$link->exec($requete);
-	echo "le client a été crée";
+	$requete= $link->prepare('insert into Client values('.$lastId.',"'.$nomClient.'","'.$prenomClient.'","'.$mailClient.'","'.$telephoneClient.'","'.$RIBClient.'"")');
+	$success = $requete->execute();
+
+	if($success){
+
+	   $message = 'Client ajout�e !';
+	}
+
+	else{
+
+	   $message = 'Echec de la cr�ation';
+	}
+
 }
 function listeModele($idGamme){
 	$link=connexionDB();
@@ -588,5 +577,64 @@ function ListeClientDetaille(){
     }
     return $array;
 }
+ function getClientById($idClient)
+ {
+	$array=array();
+	$link=connexionDB();
+	$result=$link->query('select * from Client where idClient='.$idClient);
+	if($result){
+	while($row=$result->fetch())
+	{
+		array_push($array,$row[1]);
+		array_push($array,$row[2]);
+		array_push($array,$row[3]);
+		array_push($array,$row[4]);
+		array_push($array,$row[5]);
+	} 
+} else{
+	print_r($link->errorInfo());
+	echo"Ce client n'existe pas";
+}
+return $array;
 
+ }
+
+ function DeleteClientById($idClient)
+ {
+	 $link=connexionDB();
+	 $result = $link->prepare('DELETE FROM Client WHERE idClient ='.$idClient);
+	 $success = $result -> execute();
+
+	 if($success){
+
+		$message = 'Client supprimé !';
+	 }
+
+	 else{
+
+		$message = 'Echec de la suppression';
+	 }
+
+
+ }
+
+ function UpdateClientById($idClient, $nomClient, $prenomClient, $mailClient, $telephoneClient, $RIBClient)
+ {
+
+	 $link=connexionDB();
+	 $result = $link->prepare('UPDATE Client SET nomClient ="'.$nomClient.'", prenomClient ="'.$prenomClient.'", mailClient ="'.$mailClient.'", telephoneClient ='.$telephoneClient.', RIBClient = "'.$RIBClient.'" WHERE idClient ='.$idClient);
+	 $success = $result -> execute();
+
+	 if($success){
+
+		$message = 'Client modifié !';
+	 }
+
+	 else{
+
+		$message = 'Echec de la modification';
+	 }
+
+
+ }
 ?>

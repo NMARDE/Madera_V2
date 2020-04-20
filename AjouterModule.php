@@ -144,6 +144,7 @@ echo'	<div class="hero-wrap js-fullheight" style="background-image: url(\'image/
 		?>
 		<script>
 		document.location.href="Recapitulatif.php";
+		alert('Le module a été ajouté');
 		</script>
 		<?php
 		
