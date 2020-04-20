@@ -12,11 +12,15 @@ if(isset($_POST['RechercheProjet'])){
 	$Modele=getModeleById($Projet[5]);
 	$_POST['Gamme']=$Modele[1];
 	$_POST['ModeleGamme']=$Modele[0];
+	$_POST['Isolant']=getLibelleIsolantById($Projet[7]);
+	$_POST['Finition']=getLibelleFinitionById($Projet[8]);
 }else{
 	$Projet=getProjetFromName($_SESSION['NomProjet']);
 	$Modele=getModeleById($Projet[5]);
 	$_POST['Gamme']=$Modele[1];
 	$_POST['ModeleGamme']=$Modele[0];
+	$_POST['Isolant']=getLibelleIsolantById($Projet[7]);
+	$_POST['Finition']=getLibelleFinitionById($Projet[8]);
 	$FromModule=true;
 	
 }
@@ -31,9 +35,7 @@ if(isset($_POST['RechercheProjet'])){
     
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
-<?php $arrayModule=listeModuleProjet();
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
  
     <link rel="stylesheet" href="./css/animate.css">
     
@@ -48,9 +50,10 @@ if(isset($_POST['RechercheProjet'])){
     <link rel="stylesheet" href="./css/style.css">
   </head>
   <body>
-
-  <?php require('navbar.php'); ?>
   <div class="hero-wrap js-fullheight" style="background-image: url('image/bois_accueil.jpg');" data-stellar-background-ratio="0.5">
+<?php $arrayModule=listeModuleProjet();
+require('navbar.php');
+  
 if(!empty($arrayModule)){
 	$arrayCarac=array();
 	$libelleCarac=array();
@@ -77,7 +80,7 @@ if(!empty($arrayModule)){
       </div>
 <?php
 if($FromModule){
-	echo '<br>Le modele a été ajouté';
+	echo '<br>Le modele a Ã©tÃ© ajoutÃ©';
 }
 ?>
     </div>
@@ -93,7 +96,7 @@ if($FromModule){
 <tbody>
 <tr>
 <td>Nom du projet</td> 
-<td><?php echo $_POST['NomProjet'] ?></td>
+<td><?php echo $_SESSION['NomProjet'] ?></td>
 </tr>
 <tr>
 <td>Gamme</td> 

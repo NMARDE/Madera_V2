@@ -195,6 +195,28 @@ function getProjetFromName($NomProjet){
 	}
 	return $array;	
 }
+function getLibelleFinitionById($idFinition){
+	$link=connexionDB();
+	$libelle="";
+	$result=$link->query('select libelleFinitionMaison from FinitionMaison where idFinitionMaison='.$idFinition);
+	if($result){
+		while($row=$result->fetch()){
+			$libelle=$row[0];
+		}
+	}
+	return $libelle;
+}
+function getLibelleIsolantById($idIsolant){
+	$link=connexionDB();
+	$libelle="";
+	$result=$link->query('select libelleIsolantMaison from IsolantMaison where idIsolantMaison='.$idIsolant);
+	if($result){
+		while($row=$result->fetch()){
+			$libelle=$row[0];
+		}
+	}
+	return $libelle;
+}
 function caracModule($Module){
 	$link=connexionDB();
 	$array=array();
@@ -514,55 +536,4 @@ function getImageModeleByName($nomModele) {
 	return $array;
 }
 
-function listeModuleProjet(){
-    $link=connexionDB();
-    $array=array();
-    $idProjet=getProjetFromName($_SESSION['NomProjet']);
-    $result=$link->query('select distinct libelle_module from Module,Projet_has_Caractéristiques where Projet_has_Caractéristiques.Caractéristiques_Module_idModule=Module.idModule and Projet_idProjet='.$idProjet[0]);
-    if($result){
-        while($row=$result->fetch()){
-            array_push($array,$row[0]);
-        }
-    }else{
-        print_r($link->errorInfo());
-    }
-    return $array;
-}
-function getProjetCarac($unModule){
-    $link=connexionDB();
-    $array=array();
-    $idModule=getModuleByName($unModule);
-    $idProjet=getProjetFromName($_SESSION['NomProjet']);
-    $result=$link->query('select Caractéristiques_idCaractéristiques from Projet_has_Caractéristiques where Projet_idProjet='.$idProjet[0].' and Caractéristiques_Module_idModule='.$idModule);
-    if($result){
-        while($row=$result->fetch()){
-            array_push($array,$row[0]);
-        }
-    }else{
-        print_r($link->errorInfo());
-    }
-    return $array;
-}
-function getLibelleCaracById($idCarac,$unModule){
-    $link=connexionDB();
-    $idModule=getModuleByName($unModule);
-    $array=array();
-    $idProjet=getProjetFromName($_SESSION['NomProjet']);
-    $result=$link->query('select libelle_caracteristiques, libelle_ValCarac 
-    from Caractéristiques, Projet_has_Caractéristiques, ValCarac 
-    where Caractéristiques.idCaractéristiques=Projet_has_Caractéristiques.Caractéristiques_idCaractéristiques
-    and ValCarac.idValCarac=Projet_has_Caractéristiques.Caractéristiques_ValCarac_idValCarac
-    and Projet_idProjet='.$idProjet[0].' 
-    and Caractéristiques_Module_idModule='.$idModule.' 
-    and Projet_has_Caractéristiques.Caractéristiques_idCaractéristiques='.$idCarac);
-    if($result){
-        while($row=$result->fetch()){
-            array_push($array,$row[0]);
-            array_push($array,$row[1]);
-        }
-    }else{
-        print_r($link->errorInfo());
-    }
-    return $array;
-}
 ?>
