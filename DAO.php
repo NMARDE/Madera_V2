@@ -34,26 +34,6 @@ function listeClient(){
 	}
 	return $array;
 }
-function ListeClientDetaille(){
-	$link=connexionDB();
-	$array=array();
-	$result=$link->query('select * from Client');
-	if($result){
-		$i=0;
-		while($row=$result->fetch()){
-			$array[$i]['nomClient']=$row[1];
-			$array[$i]['prenomClient']=$row[2];
-			$array[$i]['mailClient']=$row[3];
-			$array[$i]['telephoneClient']=$row[4];
-			$array[$i]['RIBClient']=$row[5];
-			$i++;
-		}
-	}else{
-		print_r($link->errorInfo());
-		echo"pas de client";
-	}
-	return $array;
-}
 function nouveauClient($nomClient,$prenomClient,$emailClient,$telephoneClient){
 	$link=connexionDB();
 	$lastId=0;
