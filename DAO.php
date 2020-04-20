@@ -46,18 +46,19 @@ function nouveauClient($nomClient,$prenomClient,$mailClient,$telephoneClient,$RI
 		print_r($link->errorInfo());
 	}
 	$lastId++;
-	$requete= $link->prepare('insert into Client values('.$lastId.',"'.$nomClient.'","'.$prenomClient.'","'.$mailClient.'","'.$telephoneClient.'","'.$RIBClient.'"")');
+	$requete= $link->prepare('insert into Client values('.$lastId.',"'.$nomClient.'","'.$prenomClient.'","'.$mailClient.'","'.$telephoneClient.'","'.$RIBClient.'")');
 	$success = $requete->execute();
 
 	if($success){
 
-	   $message = 'Client ajouté !';
+	   $message = 'Client ajoutée !';
 	}
 
 	else{
 
 	   $message = 'Echec de la création';
 	}
+	return $message;
 
 }
 function listeModele($idGamme){
