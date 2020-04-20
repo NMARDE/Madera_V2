@@ -356,9 +356,18 @@ function creerModule($listeCarac,$Module,$TailleModule){
 	$link=connexionDB();
 	$idModule=getModuleByName($Module);
 	$projet=getProjetFromName($_SESSION['NomProjet']);
+	$doublon=false;
 	for($i=0;$i<count($listeCarac);$i++){
 		if($i%2 != 1){
-		$link->query('insert into Projet_has_Caractéristiques values('.$projet[0].','.$listeCarac[$i].','.$idModule.','.$listeCarac[$i+1].',"'.$TailleModule.'")');
+			$result=$link->query('select * from Projet_has_Caractéristiques where Projet_idProjet='.$projet[0].' and Caractéristiques_idCaractéristiques='.$listeCarac[$i].' and Caractéristiques_Module_idModule='.$idModule);
+			while($row=$result->fetch()){
+				$doublon=true;
+			}
+			if(!$doublon){
+				$link->query('insert into Projet_has_Caractéristiques values('.$projet[0].','.$listeCarac[$i].','.$idModule.','.$listeCarac[$i+1].',"'.$TailleModule.'")');
+			}else{
+				echo "doublon interdit ";
+			}
 		}
 	}
 }

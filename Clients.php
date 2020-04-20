@@ -39,7 +39,7 @@ require_once('DAO.php')
     </div>
 
 
-
+<br><br><br><br>
 <div class="container">
 <div class="search card card-container">
 <h3>Clients</h3>
