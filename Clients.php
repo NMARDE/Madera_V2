@@ -44,22 +44,28 @@ require_once('DAO.php')
 <div class="search card card-container">
 <h3>Clients</h3>
 <a class="btn btn-primary btn-block" href="addClient.php">Ajouter un client</a><br>
-<table class="table table-striped">
+<table class="table clients table-striped">
 <thead>
 <th>Nom</th>
 <th>Prénom</th>
 <th>Adresse</th>
 <th>Téléphone</th>
 <th>Edition</th>
+<th></th>
 </thead>
 <tbody>
 <?php 
 $i = 0;
 $arrayClient = ListeClientDetaille();
+
 while(isset($arrayClient[$i]['nomClient'])){
   
-  echo'<tr><td>'.$arrayClient[$i]['nomClient'].'</td>';
-  '<td>'.$arrayClient[$i]['prenomClient'].'</td></tr>';
+  echo'<tr><td>'.$arrayClient[$i]['nomClient'].'</td>
+  <td>'.$arrayClient[$i]['prenomClient'].'</td>
+  <td>'.$arrayClient[$i]['mailClient'].'</td>
+  <td>'.$arrayClient[$i]['telephoneClient'].'</td>
+  <td><a class="btn btn-primary btn-block" href="editClient.php?id='.$arrayClient[$i]['idClient'].'">Modifier</td>
+  <td><a class="btn btn-primary btn-block" href="deleteClient.php?id='.$arrayClient[$i]['idClient'].'">Supprimer</td></tr>';
   $i++;
   }
 
