@@ -12,8 +12,8 @@
   <div class="collapse navbar-collapse" id="ftco-nav">
     <ul class="navbar-nav ml-auto">
         <li <?php if($page == "accueil.php"){echo 'class="nav-item active"';} else{echo 'class="nav-item"';} ?>><a href="accueil.php" class="nav-link">Accueil</a></li>
-        <li <?php if($page != "accueil.php" && $page != "Clients.php" && $page!="Projets.php"){echo 'class="nav-item active"';}  else{echo 'class="nav-item"';} ?>><a href="NommerProjet.php" class="nav-link">Simuler une maison</a></li>
-        <li <?php if($page == "Clients.php"){echo 'class="nav-item active"';}  else{echo 'class="nav-item"';} ?>><a href="Clients.php" class="nav-link">Clients</a></li>
+        <li <?php if($page != "accueil.php" && $page != "Clients.php" && $page!="Projets.php" && preg_match("/editClient/i","$page") && preg_match("/deleteClient/i", "$page")){echo 'class="nav-item active"';}  else{echo 'class="nav-item"';} ?>><a href="NommerProjet.php" class="nav-link">Simuler une maison</a></li>
+        <li <?php if($page == "Clients.php" || preg_match("/editClient/i","editClient.php") || preg_match("/deleteClient/i", "deleteClient.php")){echo 'class="nav-item active"';}  else{echo 'class="nav-item"';} ?>><a href="Clients.php" class="nav-link">Clients</a></li>
         <li <?php if($page == "Projets.php"){echo 'class="nav-item active"';}  else{echo 'class="nav-item"';} ?>><a href="Projets.php" class="nav-link">Projets</a></li>
     </ul>
   </div>

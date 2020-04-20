@@ -1,8 +1,12 @@
 <?php
 include("DAO.php");
 if(isset($_POST['nomClient'])){
-	echo "coucou";
-	nouveauClient($_POST['nomClient'],$_POST['prenomClient'],$_POST['emailClient'],$_POST['telephoneClient'], $_POST['RIBClient']);
+	nouveauClient($_POST['nomClient'],$_POST['prenomClient'],$_POST['mailClient'],$_POST['telephoneClient'], $_POST['RIBClient']); ?>
+	    <script>
+    document.location.href="Clients.php";
+    alert('Le client a été créé');
+    </script>
+<?php
 }
 ?>
 <html>
@@ -30,6 +34,7 @@ if(isset($_POST['nomClient'])){
   </head>
   <body>
 
+
 <?php require('navbar.php');?>
 
 <div class="hero-wrap js-fullheight" style="background-image: url('image/bois_accueil.jpg');" data-stellar-background-ratio="0.5">
@@ -39,6 +44,8 @@ if(isset($_POST['nomClient'])){
         </div>
       </div>
     </div>
+
+
 <div class="container">
     <div class="card card-container">
 	<h3>Ajouter un nouveau client</h3>
@@ -46,7 +53,7 @@ if(isset($_POST['nomClient'])){
 			<form method="post" class="form-signin" action="CreationClient.php">
 					<input type="text" class="form-control" placeholder="Nom" id="nomClient" name="nomClient"/>
 					<input type="text" class="form-control" placeholder="Prénom" id="prenomClient" name="prenomClient"/>
-					<input type="text" class="form-control" placeholder="Adresse mail" id="emailClient" name="emailClient"/>
+					<input type="text" class="form-control" placeholder="Adresse mail" id="mailClient" name="mailClient"/>
 					<input type="text" class="form-control" placeholder="Téléphone (fixe ou portable)" id="telephoneClient" name="telephoneClient" />
 					<input type="text" class="form-control" placeholder="RIB" id="RIBClient" name="RIBClient" />
 					</br>

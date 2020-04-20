@@ -78,11 +78,6 @@ if(!empty($arrayModule)){
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
         </div>
       </div>
-<?php
-if($FromModule){
-	echo '<br>Le modele a été ajouté';
-}
-?>
     </div>
 
 <div class="container-fluid">
