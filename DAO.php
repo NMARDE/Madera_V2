@@ -637,4 +637,28 @@ return $array;
 
 
  }
+
+ function getProjet()
+ {
+	 $array=array();
+	 $link = connexionDB();
+	 $result = $link->query('SELECT idProjet, nomProjet, dateProjet, CONCAT(nomClient, \' \', prenomClient), CONCAT(nomCommercial, \' \', prenomCommercial) FROM Projet, Client, Commercial WHERE Projet.Client_idClient = Client.idClient AND Projet.Commercial_idCommercial = Commercial.idCommercial');
+	 if($result)
+	 {
+		 $i=0;
+		 while($row=$result->fetch()){
+			$array[$i]['idProjet']=$row[0];
+			$array[$i]['nomProjet']=$row[1];
+            $array[$i]['dateProjet']=$row[2];
+            $array[$i]['nomClient']=$row[3];
+            $array[$i]['nomCommercial']=$row[4];
+            $i++;
+        }
+    }else{
+        print_r($link->errorInfo());
+        echo"pas de projet";
+    }
+    return $array;
+
+	 }
 ?>

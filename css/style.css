@@ -9455,6 +9455,11 @@ footer {
     max-width: 900px;
 }
 
+.projets.card-container.card {
+  max-width: 1200px;
+  margin-top: -1000px;
+}
+
   .card {
     background-color: #F7F7F7;
     /* just in case there no content*/
