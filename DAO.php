@@ -40,14 +40,14 @@ function listeClient2(){
 	$result=$link->query('select * from Client');
 	if($result){
 		$i=0;
-	while($row=$result->fetch()){
-		$array[$i]['nomClient']=$row[1];
-		$array[$i]['prenomClient']=$row[2];
-		$array[$i]['mailClient']=$row[3];
-		$array[$i]['telephoneClient']=$row[4];
-		$array[$i]['RIBClient']=$row[5];
-		$i++;
-	}
+		while($row=$result->fetch()){
+			$array[$i]['nomClient']=$row[1];
+			$array[$i]['prenomClient']=$row[2];
+			$array[$i]['mailClient']=$row[3];
+			$array[$i]['telephoneClient']=$row[4];
+			$array[$i]['RIBClient']=$row[5];
+			$i++;
+		}
 	}else{
 		print_r($link->errorInfo());
 		echo"pas de client";
