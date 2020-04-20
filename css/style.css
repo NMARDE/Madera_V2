@@ -9577,3 +9577,9 @@ padding-left: 15px;
 color: white;
 
 }
+
+.table.clients td
+{
+  padding: 0.75rem;
+  border-top: 1px solid #dee2e6;
+}

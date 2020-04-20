@@ -80,7 +80,7 @@ function listeModuleProjet(){
 	$link=connexionDB();
 	$array=array();
 	$idProjet=getProjetFromName($_SESSION['NomProjet']);
-	$result=$link->query('select distinct libelle_module from Module,Projet_has_Caractéristiques where Projet_has_Caractéristiques.Caractéristiques_Module_idModule=Module.idModule and idModule='.$idProjet[0]);
+	$result=$link->query('select distinct libelle_module from Module,Projet_has_Caractéristiques where Projet_has_Caractéristiques.Caractéristiques_Module_idModule=Module.idModule and Projet_idProjet='.$idProjet[0]);
 	if($result){
 		while($row=$result->fetch()){
 			array_push($array,$row[0]);
@@ -534,6 +534,29 @@ function getImageModeleByName($nomModele) {
 		print_r($link->errorInfo());
 	}
 	return $array;
+}
+
+function ListeClientDetaille(){
+
+	$link=connexionDB();
+    $array=array();
+    $result=$link->query('select * from Client');
+    if($result){
+        $i=0;
+        while($row=$result->fetch()){
+			$array[$i]['idClient']=$row[0];
+            $array[$i]['nomClient']=$row[1];
+            $array[$i]['prenomClient']=$row[2];
+            $array[$i]['mailClient']=$row[3];
+            $array[$i]['telephoneClient']=$row[4];
+            $array[$i]['RIBClient']=$row[5];
+            $i++;
+        }
+    }else{
+        print_r($link->errorInfo());
+        echo"pas de client";
+    }
+    return $array;
 }
 
 ?>

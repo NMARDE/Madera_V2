@@ -147,6 +147,7 @@ if(!empty($arrayModule)){
 	$i= 1;
     foreach($arrayModule as $unModule){
 		
+		
 		echo 
 		'<th>Module n°'.$i.'</th>
 		<th>'.$unModule.'</th></thead>
