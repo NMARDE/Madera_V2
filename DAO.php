@@ -34,6 +34,27 @@ function listeClient(){
 	}
 	return $array;
 }
+function getClientById($idClient)
+ {
+    $array=array();
+    $link=connexionDB();
+    $result=$link->query('select * from Client where idClient='.$idClient);
+    if($result){
+    while($row=$result->fetch())
+    {
+        array_push($array,$row[1]);
+        array_push($array,$row[2]);
+        array_push($array,$row[3]);
+        array_push($array,$row[4]);
+        array_push($array,$row[5]);
+    } 
+}else{
+    print_r($link->errorInfo());
+    echo"Ce client n'existe pas";
+}
+return $array;
+
+ }
 function nouveauClient($nomClient,$prenomClient,$emailClient,$telephoneClient){
 	$link=connexionDB();
 	$lastId=0;
