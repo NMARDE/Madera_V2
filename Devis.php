@@ -38,7 +38,7 @@ $pdf = new facturePDF($adresse, $client, $piedPage1."\n".$piedPage2."\n".$piedPa
 //	- $logoPosY : coordonnée sur X (ordonnées)
 //	- $logoWidth : largeur de l'image (en mm);
 //
-$pdf->setLogo('logo.png');
+$pdf->setLogo('nature.png');
 
 // entête des produits
 // gabarit : template['productHead']

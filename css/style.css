@@ -9451,6 +9451,10 @@ footer {
       margin-top: -700px;
   }
 
+  .search.card-container.card {
+    max-width: 900px;
+}
+
   .card {
     background-color: #F7F7F7;
     /* just in case there no content*/
