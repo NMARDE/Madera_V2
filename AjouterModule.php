@@ -142,7 +142,11 @@ echo'	<div class="hero-wrap js-fullheight" style="background-image: url(\'image/
 			}
 		}
 		creerModule($listeCarac,$_POST['Module'],$_POST['tailleModule']);
-		
+		?>
+		<script>
+		document.location.href="Recapitulatif.php";
+		</script>
+		<?php
 		
 	}
 

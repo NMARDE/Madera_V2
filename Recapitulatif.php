@@ -1,21 +1,30 @@
 <?php
 session_start();
 include('DAO.php');
+$FromModule=false;
 if(isset($_POST['Projet'])){
 	$_SESSION['NomProjet']=$_POST['NomProjet'];
 	creerProjet($_POST['NomProjet'],$_POST['NomClient'],$_POST['Gamme'],$_POST['ModeleGamme'],$_POST['Isolant'],$_POST['Finition']);
-}
+}else{
 if(isset($_POST['RechercheProjet'])){
 	$_SESSION['NomProjet']=$_POST['NomProjet'];
-	$Projet=getProjetFromName($_POST['NomProjet']);
+	$Projet=getProjetFromName($_SESSION['NomProjet']);
 	$Modele=getModeleById($Projet[5]);
 	$_POST['Gamme']=$Modele[1];
 	$_POST['ModeleGamme']=$Modele[0];
+}else{
+	$Projet=getProjetFromName($_SESSION['NomProjet']);
+	$Modele=getModeleById($Projet[5]);
+	$_POST['Gamme']=$Modele[1];
+	$_POST['ModeleGamme']=$Modele[0];
+	$FromModule=true;
+	
+}
 }
 ?>
 <html>
 Nom du Projet<br>
-<?php echo $_POST['NomProjet'] ?><br>
+<?php if(isset($_POST['NomProjet'])){echo $_POST['NomProjet'];}else{echo $_SESSION['NomProjet'];} ?><br>
 Gamme<br>
 <?php echo $_POST['Gamme'] ?><br>
 Modele de Gamme<br>
@@ -41,8 +50,13 @@ if(!empty($arrayModule)){
 }
 ?>
 <input type="hidden" name="plan" value="<?php if(isset($_POST['plan'])){echo $_POST['plan'];}?>">
-<input type="hidden" name="NomProjet" value="<?php if(isset($_POST['NomProjet'])){echo $_POST['NomProjet'];}?>">
+<input type="hidden" name="NomProjet" value="<?php if(isset($_POST['NomProjet'])){echo $_POST['NomProjet'];}else{echo $_SESSION['NomProjet'];}?>">
 <input type="hidden" name="Coupe" value="<?php if(isset($_POST['Coupe'])){echo $_POST['Coupe'];}?>"><br>
 <a href="AjouterModule.php?=<?php if(isset($_POST['NomProjet'])){echo $_POST['NomProjet'];}?>">Ajouter un module</a>
 <a href="Devis.php">Créer le devis</a>
+<?php
+if($FromModule){
+	echo '<br>Le modele a été ajouté';
+}
+?>
 </html>
