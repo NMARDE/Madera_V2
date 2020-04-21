@@ -134,10 +134,10 @@ echo'	<div class="hero-wrap js-fullheight" style="background-image: url(\'image/
 			if($i%2 != 1){
 			$currentIdCarac="IdCarac".$i;
 			$currentCarac="Carac".$i;
-			if(isset($_POST[$currentCarac])){
-				array_push($listeCarac,$_POST[$currentIdCarac]);
-				array_push($listeCarac,getValCaracByLib($_POST[$currentCarac],$_POST[$currentIdCarac]));
-			}
+				if(isset($_POST[$currentCarac])){
+					array_push($listeCarac,$_POST[$currentIdCarac]);
+					array_push($listeCarac,getValCaracByLib($_POST[$currentCarac],$_POST[$currentIdCarac]));
+				}
 			}
 		}
 		creerModule($listeCarac,$_POST['Module'],$_POST['tailleModule']);

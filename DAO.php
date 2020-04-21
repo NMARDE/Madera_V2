@@ -61,6 +61,19 @@ function nouveauClient($nomClient,$prenomClient,$mailClient,$telephoneClient,$RI
 	return $message;
 
 }
+function getTailleModule($idProjet,$idModule){
+	$lin=connexionDB();
+	$result=$link->query('select taille from Projet_has_Caractéristiques where Projet_idProjet='.$idProjet.' and Module_idModule='.$idModule.'');
+	$laTaille=0;
+	if($result){
+		while($row=$result->fetch()){
+			$laTaille=$row[0];
+		}
+	}else{
+		print_r($link->errorInfo());
+	}
+	return $laTaille;
+}
 function listeModele($idGamme){
 	$link=connexionDB();
 	$array=array();
@@ -367,8 +380,9 @@ function creerModule($listeCarac,$Module,$TailleModule){
 			if(!$doublon){
 				$link->query('insert into Projet_has_Caractéristiques values('.$projet[0].','.$listeCarac[$i].','.$idModule.','.$listeCarac[$i+1].',"'.$TailleModule.'")');
 			}else{
-				echo "doublon interdit ";
+				echo "La caractéristique ".$listeCarac[$i]."avec la valeur ".$listeCarac[$i+1]." n'a pas été ajoutée car il s'agit d'un doublon ";
 			}
+			$doublon=false;
 		}
 	}
 }

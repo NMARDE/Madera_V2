@@ -132,6 +132,7 @@ if(!empty($arrayModule)){
 		$arrayCarac=getProjetCarac($unModule);
         if(!empty($arrayCarac)){
             foreach($arrayCarac as $oneCarac){
+				
                 $libelleCarac=getLibelleCaracById($oneCarac,$unModule);
                 echo '<tr><td>'.$libelleCarac[0].'</td>';
                 echo '<td>'.$libelleCarac[1].'</td></tr>';
